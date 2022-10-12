@@ -38,22 +38,8 @@ router.put('/:id', async (req, res, next) => {
       throw { name:"ShitId", message: "try better id" }
     } 
   } catch (error) {
-      next(error)        
+    next(error)        
   }
 })
-const errorHandler = (error, request, response, next) => {
-  console.error(error.name)
-  console.error(error.message)
-
-  if (error.name === 'ShitId') {
-    return response.status(404).send({ error: 'no such id' })
-  }else if (error.name === 'SequelizeValidationError') {
-    return response.status(400).send({ error: 'malformatted blog' })
-  }else if (error.name === 'SequelizeDatabaseError') {
-    return response.status(400).json({ error: error.message })
-  }
-  next(error)
-}
-router.use(errorHandler)
 
 module.exports = router
