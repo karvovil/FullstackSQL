@@ -46,9 +46,17 @@ router.post('/', tokenExtractor, async (req, res, next) => {
     next(error)
   }
 })
-router.delete('/:id', async (req, res) => {
-  await Blog.destroy({ where: { id: req.params.id } })
-  res.status(204).end()
+router.delete('/:id', tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  const blog = await Blog.findByPk(req.params.id)
+  console.log('userid: ', user.id, 'bloguserid :',blog.userId)
+  if (user.id === blog.userId){
+    await Blog.destroy({ where: { id: req.params.id } })
+    res.status(204).end()
+  }else{
+    res.status(403).end()
+  }
+  
 })
 router.put('/:id', async (req, res, next) => {
   try {
