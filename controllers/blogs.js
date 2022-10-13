@@ -3,6 +3,7 @@ const { Blog, User } = require('../models')
 
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
+const { Op } = require('sequelize')
 
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization')
@@ -26,6 +27,9 @@ router.get('/', async (req, res) => {
     include: {
       model: User,
       attributes: ['name']
+    },
+    where: {
+      title: { [Op.substring]: req.query.serch ? req.query.serch : ''}
     }
   })
   console.log(blogs.map(b=>b.user))
