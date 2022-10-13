@@ -29,7 +29,8 @@ router.get('/', async (req, res) => {
       attributes: ['name']
     },
     where: {
-      title: { [Op.substring]: req.query.serch ? req.query.serch : ''}
+      title: { [Op.substring]: req.query.serch ? req.query.serch : ''},
+      author: { [Op.substring]: req.query.serch ? req.query.serch : ''}
     },
     order:[['likes', 'DESC']]
   })
