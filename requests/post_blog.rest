@@ -1,8 +1,9 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1ha2UiLCJpZCI6MSwiaWF0IjoxNjY1NjUzNDUzfQ.uKdx0-aavCfbvvZvvu99cm8wkUnT3oJc_EHk5xv6PKU
 
 {
-    "author":"asdasdas",
-    "url":"www.dasda.org/asdasdsadasd",
-    "title":"asdasdasdasdasdasdasdasdasd"
+    "author":"cccccccccccccc",
+    "url":"www.ccccccca.org/accccccccccccba",
+    "title":"bcccccccccaa_accccccccca"
 }
