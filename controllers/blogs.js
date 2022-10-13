@@ -30,7 +30,8 @@ router.get('/', async (req, res) => {
     },
     where: {
       title: { [Op.substring]: req.query.serch ? req.query.serch : ''}
-    }
+    },
+    order:[['likes', 'DESC']]
   })
   console.log(blogs.map(b=>b.user))
   const blogStrings = blogs.map(b => 
