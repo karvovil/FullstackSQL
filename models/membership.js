@@ -15,10 +15,15 @@ Membership.init({
     allowNull: false,
     references: { model: 'blogs', key: 'id' },
   },
-  readingListId: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: { model: 'reading_lists', key: 'id' },
+    references: { model: 'users', key: 'id' },
+  },
+  read: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   },
 }, {
   sequelize,

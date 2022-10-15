@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Blog, User, Reading_list } = require('../models')
+const { Blog, User } = require('../models')
 
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
@@ -29,10 +29,6 @@ router.get('/', async (req, res) => {
         model: User,
         attributes: ['name']
       },
-      {
-        model: Reading_list,
-        attributes: ['name', 'id'],
-      }
     ],
     where: {
       title: { [Op.substring]: req.query.serch ? req.query.serch : ''},
