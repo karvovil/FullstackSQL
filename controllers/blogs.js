@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Blog, User } = require('../models')
+const { Blog, User, Reading_list } = require('../models')
 
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
@@ -24,22 +24,23 @@ const tokenExtractor = (req, res, next) => {
 router.get('/', async (req, res) => {
   const blogs = await Blog.findAll({
     attributes: { exclude: ['userId'] },
-    include: {
-      model: User,
-      attributes: ['name']
-    },
+    include: [
+      {
+        model: User,
+        attributes: ['name']
+      },
+      {
+        model: Reading_list,
+        attributes: ['name', 'id'],
+      }
+    ],
     where: {
       title: { [Op.substring]: req.query.serch ? req.query.serch : ''},
       author: { [Op.substring]: req.query.serch ? req.query.serch : ''}
-    },
+    },  
     order:[['likes', 'DESC']]
   })
-  console.log(blogs.map(b=>b.user))
-  const blogStrings = blogs.map(b => 
-    `id: ${b.id} ${b.user ? 'user: '+b.user.name :''} author: ${b.author} titel: '${b.title}', ${b.likes} likes`
-  )
-  blogStrings.map(bs => console.log(bs))
-  res.json(blogStrings)
+  res.json(blogs)
 })
   
 router.post('/', tokenExtractor, async (req, res, next) => {
