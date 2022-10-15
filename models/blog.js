@@ -23,6 +23,16 @@ Blog.init({
   likes: {
     type: DataTypes.INTEGER,
     default: 0
+  },
+  year: {
+    type: DataTypes.INTEGER,
+    validate:  {
+      validYear(y) {
+        if ( y < 1991 || y > new Date().getFullYear() ) {
+          throw new Error('Shit year');
+        }
+      }
+    }
   }
 }, {
   sequelize,

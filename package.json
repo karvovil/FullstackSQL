@@ -4,7 +4,9 @@
   "description": "blogapp backend",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "dev": "nodemon index.js",
+    "migration:down": "node util/rollback.js"
   },
   "repository": {
     "type": "git",

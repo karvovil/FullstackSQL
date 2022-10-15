@@ -18,11 +18,11 @@ module.exports = {
       title: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
+      },
       likes: {
         type: DataTypes.INTEGER,
         default: 0
-      }
+      },
     })
     await queryInterface.createTable('users', {
       id: {
@@ -42,6 +42,8 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
     })
     await queryInterface.addColumn('blogs', 'user_id', {
       type: DataTypes.INTEGER,
