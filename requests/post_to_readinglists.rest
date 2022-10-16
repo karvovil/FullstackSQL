@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/readinglists
+Content-Type: application/json
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFAYS5hYSIsImlkIjoxLCJpYXQiOjE2NjU5MTQwOTh9.QRh7A5TL3LGqELcw9dIqSKt_5ZK5uWw9V99aNSQgnVw
+
+{
+  "blog_id": 3,
+  "user_id": 1
+}
