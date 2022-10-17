@@ -29,7 +29,12 @@ router.get('/:id', async (req, res) => {
       model: Blog,
       as: 'readings',
       attributes: { exclude: ['userId'] },
-      through: { attributes: [] }
+      through: { attributes: [] },
+      include: {
+        model: Membership,
+        as: 'readinglists',
+        attributes: ['read','id']
+      }
     }
   })
   const readings = await Membership.findAll({where: {userId: user.id}})
