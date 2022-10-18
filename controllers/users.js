@@ -23,6 +23,11 @@ router.post('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res) => {
+  const membershipQueryParameters = 
+    typeof req.query.read == 'undefined'
+    ? {userId: req.params.id}
+    : {userId: req.params.id, read: req.query.read}
+
   const user = await User.findOne({
     where: { id: req.params.id },
     include: {
@@ -33,17 +38,13 @@ router.get('/:id', async (req, res) => {
       include: {
         model: Membership,
         as: 'readinglists',
-        attributes: ['read','id']
+        attributes: ['read','id'],
+        where: membershipQueryParameters
       }
     }
   })
-  const readings = await Membership.findAll({where: {userId: user.id}})
-  if (user) {
-    const userInfo = {...user, readings: readings}
+  if (!user) { res.status(404).end() }
     res.json(user)
-  } else {
-    res.status(404).end()
-  }
 })
 router.put('/:username', async (req, res, next) => {
   try {
